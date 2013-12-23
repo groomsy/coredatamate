@@ -1,7 +1,9 @@
+platform :ios
+
 pod "CoreDataMate", :path => "../"
 
-target "Demo" do
-end
-
-target "DemoTests" do
-end
+# target "Demo" do
+# end
+# 
+# target "DemoTests" do
+# end
