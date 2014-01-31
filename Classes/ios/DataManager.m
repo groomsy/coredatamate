@@ -27,6 +27,9 @@ static NSString *_persistenceType = nil;
     _dataModelName = dataModelName;
     _storeName = storeName;
     _persistenceType = persistenceType;
+
+    // Initialize
+    [DataManager sharedManager];
 }
 
 + (instancetype)sharedManager
@@ -54,11 +57,22 @@ static NSString *_persistenceType = nil;
     self = [super init];
     if ( self != nil )
     {
+        if ( _dataModelName == nil || _storeName == nil || _persistenceType == nil )
+        {
+            SEL selector = @selector(setupWithDataModelName:storeName:persistenceType:);
+            NSString *selectorName = NSStringFromSelector(selector);
+            [NSException raise:NSInternalInconsistencyException
+                        format:@"You must call %@ first.", selectorName];
+        }
+
+
         NSURL *modelURL = [[NSBundle bundleForClass:[self class]] URLForResource:_dataModelName withExtension:@"momd"];
         NSManagedObjectModel *managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
         
         NSPersistentStoreCoordinator *persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:managedObjectModel];
-        NSAssert(persistentStoreCoordinator != nil, @"Failed to initialize the persistent store coordinator.");
+        if ( persistentStoreCoordinator == nil )
+            [NSException raise:NSInternalInconsistencyException
+                        format:@"Failed to initialize the persistent store coordinator."];
 
         NSString *storeName = [NSString stringWithFormat:@"%@.sqlite", _storeName];
         NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:storeName];
@@ -78,8 +92,8 @@ static NSString *_persistenceType = nil;
                                                                                     error:&error];
         if ( store == nil )
         {
-            DDLogError(@"Failed to add store type: %@\n%@", [error localizedDescription], [error userInfo]);
-            [NSException raise:NSInternalInconsistencyException format:@"Store must be set up correctly."];
+            [NSException raise:NSInternalInconsistencyException
+                        format:@"Failed to add store type when setting up store: %@\n%@", [error localizedDescription], [error userInfo]];
         }
         
         _privateContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
@@ -115,7 +129,7 @@ static NSString *_persistenceType = nil;
 {
     if ( _mainContext == nil )
     {
-        DDLogWarn(@"No main context found.");
+        NSLog(@"No main context found.");
         return;
     }
     
@@ -127,7 +141,7 @@ static NSString *_persistenceType = nil;
             BOOL successful = [_mainContext save:&error];
             if ( successful == NO )
             {
-                DDLogError(@"Error saving main context: %@\n%@", [error localizedDescription], [error userInfo]);
+                NSLog(@"Error saving main context: %@\n%@", [error localizedDescription], [error userInfo]);
             }
         }];
     }
@@ -138,7 +152,7 @@ static NSString *_persistenceType = nil;
         BOOL successful = [_privateContext save:&error];
         if ( successful == NO )
         {
-            DDLogError(@"Error saving main context: %@\n%@", [error localizedDescription], [error userInfo]);
+            NSLog(@"Error saving main context: %@\n%@", [error localizedDescription], [error userInfo]);
         }
     };
 
