@@ -1,14 +1,14 @@
 //
-//  DataManager.m
+//  CDMDataManager.m
 //  CoreDataMate
 //
 //  Created by Todd Grooms on 6/1/13.
 //  Copyright (c) 2013 Groomsy Dev. All rights reserved.
 //
 
-#import "DataManager.h"
+#import "CDMDataManager.h"
 
-@interface DataManager ()
+@interface CDMDataManager ()
 {
     NSManagedObjectContext *_mainContext;
     NSManagedObjectContext *_privateContext;
@@ -16,7 +16,7 @@
 
 @end
 
-@implementation DataManager
+@implementation CDMDataManager
 
 static NSString *_dataModelName = nil;
 static NSString *_storeName = nil;
@@ -29,7 +29,7 @@ static NSString *_persistenceType = nil;
     _persistenceType = persistenceType;
 
     // Initialize
-    [DataManager sharedManager];
+    [CDMDataManager sharedManager];
 }
 
 + (instancetype)sharedManager
@@ -48,7 +48,7 @@ static NSString *_persistenceType = nil;
 
 - (id)init
 {
-    [NSException raise:NSMallocException format:@"Cannot instantiate DataManager Singleton."];
+    [NSException raise:NSMallocException format:@"Cannot instantiate CDMDataManager Singleton."];
     return nil;
 }
 

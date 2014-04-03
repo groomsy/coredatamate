@@ -1,5 +1,5 @@
 //
-//  DataManager.h
+//  CDMDataManager.h
 //  CoreDataMate
 //
 //  Created by Todd Grooms on 6/1/13.
@@ -9,13 +9,13 @@
 #import <CoreData/CoreData.h>
 #import <Foundation/Foundation.h>
 
-@interface DataManager : NSObject
+@interface CDMDataManager : NSObject
 
 + (void)setupWithDataModelName:(NSString *)dataModelName
                      storeName:(NSString *)storeName
                persistenceType:(NSString *)persistenceType;
 
-+ (DataManager *)sharedManager;
++ (instancetype)sharedManager;
 
 - (NSManagedObjectContext *)mainContext;
 
