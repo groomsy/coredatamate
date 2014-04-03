@@ -1,5 +1,7 @@
 # CoreDataMate
 
+CoreDataMate is a lightweight CoreData assistant. It gives you all of the control of CoreData, but helps you manage it.
+
 [![Version](http://cocoapod-badges.herokuapp.com/v/CoreDataMate/badge.png)](http://cocoadocs.org/docsets/CoreDataMate)
 [![Platform](http://cocoapod-badges.herokuapp.com/p/CoreDataMate/badge.png)](http://cocoadocs.org/docsets/CoreDataMate)
 
