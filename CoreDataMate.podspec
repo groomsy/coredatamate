@@ -1,11 +1,11 @@
 Pod::Spec.new do |s|
   s.name         = "CoreDataMate"
-  s.version      = "0.1.1"
+  s.version      = "0.1.0"
   s.summary      = "CoreDataMate is a lightweight CoreData assistant."
   s.description  = <<-DESC
                     CoreDataMate is a lightweight CoreData assistant. It gives you all of the control of CoreData, but helps you manage it.
                    DESC
-  s.homepage     = "http://https://github.com/groomsy/coredatamate"
+  s.homepage     = "https://github.com/groomsy/coredatamate"
   s.license      = 'MIT'
   s.author       = { "Todd Grooms" => "todd.grooms@gmail.com" }
   s.source       = { :git => "https://github.com/groomsy/coredatamate.git", :tag => "#{s.version}" }
