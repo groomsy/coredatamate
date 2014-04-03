@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "CoreDataMate"
-  s.version      = "0.1.0"
+  s.version      = "0.1.1"
   s.summary      = "CoreDataMate is a lightweight CoreData assistant."
   s.description  = <<-DESC
                     CoreDataMate is a lightweight CoreData assistant. It gives you all of the control of CoreData, but helps you manage it.
