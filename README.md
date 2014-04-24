@@ -54,7 +54,7 @@ Remember: Your data is not fully persisted until the `CDMDataManager` instance i
 
 ## Author
 
-Todd Grooms, todd.grooms@metova.com
+Todd Grooms, todd.grooms@gmail.com
 
 ## License
 
