@@ -43,7 +43,7 @@ If you need to perform operations on a background queue, create a temporary `NSM
     // Perform background queue operations
     
     // This call writes your changes to CDMDataManager's mainContext
-    BOOL successfulSave = [temporaryContext save:error];
+    BOOL successfulSave = [temporaryContext save:&error];
     if ( successfulSave )
     {
       // This call writes your changes to the store
